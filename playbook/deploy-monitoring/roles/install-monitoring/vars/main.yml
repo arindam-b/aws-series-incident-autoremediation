@@ -1,0 +1,32 @@
+---
+# Generic
+
+execution_user: "root"
+folder_permission: "775"
+
+# Application section
+
+app_dir: "/webapp"
+application_files:
+ - "app.py"
+ - "launch.sh"
+
+application_service: "webapp.service"
+application_service_name: "webapp"
+nginx_conf_dir: "/etc/nginx/conf.d"
+application_service_to_restart:
+ - "webapp"
+ - "nginx"
+
+# Monitoring section
+
+monitoring_dir: "/monitoring"
+monitoring_files:
+ - "monitoring.sh"
+monitoring_cron:
+ - "monitoring"
+
+cron_expression_weekday: "*"
+cron_expression_minute: "*"
+cron_expression_hour: "*"
+

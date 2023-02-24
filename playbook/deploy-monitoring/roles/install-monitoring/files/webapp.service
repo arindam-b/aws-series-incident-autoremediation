@@ -1,0 +1,10 @@
+[Unit]
+Description=EC2 Sample App
+After=network.target
+
+[Service]
+ExecStart=/bin/bash /webapp/launch.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

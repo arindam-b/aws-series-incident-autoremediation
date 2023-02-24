@@ -1,0 +1,37 @@
+  - name: setup monitoring directory
+    file:
+      path: "{{ monitoring_dir }}"
+      state: directory
+      owner: "{{ execution_user }}"
+      group: "{{ execution_user }}"
+      mode: "{{ folder_permission }}"
+    become: yes
+  
+  - name: copy monitoring files
+    copy:
+      src: "{{ item }}"
+      dest: "{{ monitoring_dir }}/{{ item }}"
+      owner: "{{ execution_user }}"
+      group: "{{ execution_user }}"
+      mode: "{{ folder_permission }}"
+    loop: "{{ monitoring_files }}"
+    become: yes
+ 
+  - name: update permissions
+    file:
+      path: "{{ monitoring_dir }}/{{ item }}"
+      owner: "{{ execution_user }}"
+      group: "{{ execution_user }}"
+      mode: "{{ folder_permission }}"
+    loop: "{{ monitoring_files }}" 
+  
+  - name: create a cronjob under /etc/cron.d
+    cron:
+      name: monitoring
+      weekday: "{{ cron_expression_weekday }}"
+      minute: "{{ cron_expression_minute }}"
+      hour: "{{ cron_expression_hour }}"
+      user: "{{ execution_user }}"
+      job: "/monitoring/monitoring.sh"
+      cron_file: monitoring
+    become: yes

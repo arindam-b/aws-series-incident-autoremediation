@@ -1,0 +1,4 @@
+---
+my-ec2:
+  hosts:
+    "<ec2-ip>"

@@ -1,0 +1,6 @@
+---
+  - name: setup application on ec2 amazon linux vm
+    include_tasks: setup-application.yaml
+
+  - name: setup monitoring on ec2 amazon linux vm
+    include_tasks: setup-monitoring.yaml

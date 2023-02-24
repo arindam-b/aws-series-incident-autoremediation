@@ -1,0 +1,5 @@
+---
+- name: Installation monitoring
+  hosts: 'all'
+  roles:
+     - { role: 'install-monitoring' , EXE: 1}
